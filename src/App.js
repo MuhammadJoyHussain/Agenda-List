@@ -1,14 +1,26 @@
 import React from "react";
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import Home from "./component/Home";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Home } from "./components/Home";
+import { AddUser } from "./components/AddUser";
+import { EditUser } from "./components/EditUser";
+import { GlobalProvider } from "./context/GlobalState";
 
-function App() {
+import "bootstrap/dist/css/bootstrap.min.css";
+
+const App = () => {
   return (
-    <>
-      <h1 className="text-center text-info mt-3">Agenda List</h1>
-      <Home />
-    </>
+    <div className="py-4 container">
+      <GlobalProvider>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/add" component={AddUser} />
+            <Route path="/edit/:id" component={EditUser} />
+          </Switch>
+        </Router>
+      </GlobalProvider>
+    </div>
   );
-}
+};
 
 export default App;
